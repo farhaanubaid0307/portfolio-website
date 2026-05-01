@@ -202,18 +202,40 @@
         </div>
       </section>
 
-      <section class="pitch-section section-shell" aria-label="Interactive position map">
+      <section class="pitch-section section-shell" id="position-map" aria-label="Interactive position map">
         <div class="section-kicker reveal">Position Map</div>
         <div class="section-heading reveal">
-          <h2>An interactive mini pitch that organizes the portfolio.</h2>
+          <h2>A locked scouting board built around the FARHAAN 8 jersey.</h2>
           <p>
-            Click a position to switch the scouting note. It makes the football
-            theme functional instead of just decorative.
+            Tap into the board, move through the pitch, and let each position
+            switch the scouting note with animated routes and kit-color bursts.
           </p>
         </div>
 
-        <div class="pitch-layout">
-          <div class="pitch reveal" role="group" aria-label="Portfolio position map">
+        <div class="pitch-layout reveal" id="scoutBoard">
+          <div class="pitch-lockbar" aria-label="Scouting board controls">
+            <span>FARHAAN 8 / Interactive scouting board</span>
+            <button class="board-lock" type="button" id="boardLock">Tap to lock</button>
+            <button class="board-close" type="button" id="boardClose">Back to scroll</button>
+          </div>
+
+          <div class="pitch" role="group" aria-label="Portfolio position map">
+            <div class="burst burst--blue" aria-hidden="true"></div>
+            <div class="burst burst--lime" aria-hidden="true"></div>
+            <div class="burst burst--white" aria-hidden="true"></div>
+
+            <svg class="route-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <path class="route route--defense active" data-route="defense" d="M50 82 C43 73 43 62 50 50" />
+              <path class="route route--midfield" data-route="midfield" d="M50 82 C38 68 30 61 28 55" />
+              <path class="route route--builder" data-route="builder" d="M50 82 C60 68 70 61 72 55" />
+              <path class="route route--attack" data-route="attack" d="M50 82 C56 61 55 43 50 27" />
+              <path class="route route--captain" data-route="captain" d="M50 82 C47 70 47 59 50 50" />
+            </svg>
+
+            <figure class="jersey-stage" aria-label="Farhaan number 8 jersey render">
+              <img src="assets/farhaan-jersey-render.png" alt="3D render of Farhaan's blue and black number 8 football jersey" />
+            </figure>
+
             <button class="position active" style="--x: 50%; --y: 82%" data-role="defense">
               <span>DEF</span>
             </button>
