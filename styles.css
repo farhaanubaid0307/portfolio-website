@@ -250,47 +250,13 @@ nav a:focus-visible {
   perspective: 1100px;
 }
 
-.hero-burst {
-  position: absolute;
-  border-radius: 48% 52% 62% 38% / 44% 60% 40% 56%;
-  opacity: 0.72;
-  mix-blend-mode: screen;
-  filter: blur(0.45rem);
-  transform: translate3d(calc(var(--hero-mx) * 0.2), calc(var(--hero-my) * 0.14), 0);
-  animation: bubbleDrift 8s ease-in-out infinite;
-}
-
-.hero-burst--blue {
-  right: 18%;
-  top: 21%;
-  width: min(30rem, 34vw);
-  aspect-ratio: 1;
-  background: rgba(0, 180, 230, 0.44);
-}
-
-.hero-burst--lime {
-  right: 5%;
-  top: 13%;
-  width: min(18rem, 22vw);
-  aspect-ratio: 1;
-  background: rgba(200, 255, 53, 0.3);
-  animation-delay: -2.6s;
-}
-
-.hero-burst--white {
-  right: 33%;
-  bottom: 18%;
-  width: min(13rem, 17vw);
-  aspect-ratio: 1;
-  background: rgba(244, 241, 232, 0.2);
-  animation-delay: -5s;
-}
-
 .hero-jersey {
-  --front-x: -12%;
-  --back-x: 33%;
+  --front-x: 4%;
+  --back-x: 4%;
   --front-scale: 1;
-  --back-scale: 0.86;
+  --back-scale: 1;
+  --front-opacity: 1;
+  --back-opacity: 0;
   --front-z: 4;
   --back-z: 3;
   position: absolute;
@@ -324,12 +290,14 @@ nav a:focus-visible {
 }
 
 .hero-jersey.is-flipped {
-  --front-x: 34%;
-  --back-x: -11%;
+  --front-x: 4%;
+  --back-x: 4%;
   --front-scale: 0.84;
   --back-scale: 1;
   --front-z: 3;
   --back-z: 4;
+  --front-opacity: 0;
+  --back-opacity: 1;
 }
 
 .shirt-model {
@@ -337,14 +305,15 @@ nav a:focus-visible {
   display: block;
   width: 58%;
   transform-style: preserve-3d;
-  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), filter 240ms ease;
-  will-change: transform;
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease, filter 240ms ease;
+  will-change: transform, opacity;
 }
 
 .shirt-model--front {
-  left: 0;
+  left: 17%;
   top: 4%;
   z-index: var(--front-z);
+  opacity: var(--front-opacity);
   transform:
     translate3d(var(--front-x), calc(var(--hero-my) * -0.025), 4rem)
     rotateY(-13deg)
@@ -353,9 +322,10 @@ nav a:focus-visible {
 }
 
 .shirt-model--back {
-  left: 16%;
+  left: 17%;
   top: 0;
   z-index: var(--back-z);
+  opacity: var(--back-opacity);
   transform:
     translate3d(var(--back-x), calc(var(--hero-my) * 0.018), 1.2rem)
     rotateY(14deg)
@@ -521,63 +491,9 @@ body.hero-locked {
     scale(1.03);
 }
 
-.hero.is-locked .hero-burst--blue {
-  right: 18%;
-  top: 8%;
-  width: min(42rem, 48vw);
-}
-
-.hero.is-locked .hero-burst--lime {
-  right: 3%;
-  top: 15%;
-  width: min(24rem, 28vw);
-}
-
-.hero.is-locked .match-strip {
-  bottom: 3.5rem;
-}
-
 .hero.is-locked .hero-unlock {
   display: inline-flex;
   align-items: center;
-}
-
-.match-strip {
-  position: absolute;
-  right: max(1rem, calc((100vw - 72rem) / 2));
-  bottom: 5.5rem;
-  z-index: 5;
-  display: grid;
-  width: min(22rem, calc(100% - 2rem));
-  border: 1px solid rgba(244, 241, 232, 0.18);
-  border-radius: 8px;
-  background: rgba(6, 16, 15, 0.66);
-  backdrop-filter: blur(14px);
-  box-shadow: var(--shadow);
-}
-
-.match-strip span {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 2.65rem;
-  padding: 0 1rem;
-  border-bottom: 1px solid rgba(244, 241, 232, 0.12);
-  color: rgba(244, 241, 232, 0.86);
-  font-size: 0.82rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.match-strip span:last-child {
-  border-bottom: 0;
-}
-
-.match-strip span::after {
-  content: "Live";
-  color: var(--lime);
-  font-size: 0.64rem;
 }
 
 .football {
@@ -1505,12 +1421,6 @@ body.board-locked {
     width: min(34rem, 50vw);
   }
 
-  .match-strip {
-    right: 1rem;
-    bottom: 4.7rem;
-    width: min(21rem, calc(100% - 2rem));
-  }
-
   .section-heading,
   .highlight {
     grid-template-columns: 1fr;
@@ -1593,28 +1503,10 @@ body.board-locked {
   }
 
   .hero-jersey {
-    top: 40%;
-    right: -8.5rem;
-    width: 23rem;
+    top: 38%;
+    right: -1.3rem;
+    width: min(20rem, 82vw);
     opacity: 0.9;
-  }
-
-  .hero-burst--blue {
-    right: -7rem;
-    top: 35%;
-    width: 20rem;
-  }
-
-  .hero-burst--lime {
-    right: -4rem;
-    top: 26%;
-    width: 12rem;
-  }
-
-  .hero-burst--white {
-    right: 7rem;
-    bottom: 18%;
-    width: 9rem;
   }
 
   .hero.is-locked .hero-jersey {
@@ -1630,18 +1522,6 @@ body.board-locked {
   .hero-unlock {
     top: 0.8rem;
     right: 0.8rem;
-  }
-
-  .match-strip {
-    bottom: 5.6rem;
-    left: 1rem;
-    right: 1rem;
-    width: auto;
-  }
-
-  .match-strip span {
-    min-height: 2.15rem;
-    font-size: 0.68rem;
   }
 
   .football {
