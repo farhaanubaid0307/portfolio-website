@@ -200,7 +200,7 @@ nav a:focus-visible {
 .hero__image {
   z-index: -3;
   object-fit: cover;
-  object-position: center;
+  object-position: center bottom;
   transform: scale(1.04);
   transform-origin: center;
   will-change: transform;
@@ -209,8 +209,24 @@ nav a:focus-visible {
 .hero__shade {
   z-index: -2;
   background:
-    linear-gradient(90deg, rgba(6, 16, 15, 0.9), rgba(6, 16, 15, 0.24) 48%, rgba(6, 16, 15, 0.78)),
-    linear-gradient(0deg, rgba(9, 19, 21, 0.92), rgba(9, 19, 21, 0.04) 42%, rgba(9, 19, 21, 0.64));
+    radial-gradient(circle at 76% 52%, rgba(200, 255, 53, 0.16), transparent 18rem),
+    linear-gradient(90deg, rgba(6, 16, 15, 0.92), rgba(6, 16, 15, 0.38) 48%, rgba(6, 16, 15, 0.52)),
+    linear-gradient(0deg, rgba(9, 19, 21, 0.84), rgba(9, 19, 21, 0.03) 42%, rgba(9, 19, 21, 0.48));
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.32;
+  background-image:
+    linear-gradient(rgba(244, 241, 232, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 241, 232, 0.1) 1px, transparent 1px);
+  background-position: center bottom;
+  background-size: 4.8rem 4.8rem;
+  mask-image: linear-gradient(0deg, rgba(0, 0, 0, 0.88), transparent 68%);
+  pointer-events: none;
 }
 
 .hero::after {
