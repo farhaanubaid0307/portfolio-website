@@ -1,13 +1,21 @@
 const root = document.documentElement;
 const body = document.body;
 const meter = document.querySelector(".scroll-meter span");
+const hero = document.querySelector(".hero");
 const heroImage = document.querySelector(".hero__image");
+const heroJersey = document.getElementById("heroJersey");
+const heroLock = document.getElementById("heroLock");
+const heroUnlock = document.getElementById("heroUnlock");
 const football = document.querySelector(".football");
 const cards = document.querySelectorAll(".trait-card");
 const positions = document.querySelectorAll(".position");
+const scoutBoard = document.getElementById("scoutBoard");
+const boardLock = document.getElementById("boardLock");
+const boardClose = document.getElementById("boardClose");
 const pitchLabel = document.getElementById("pitchLabel");
 const pitchTitle = document.getElementById("pitchTitle");
 const pitchText = document.getElementById("pitchText");
+const routeLines = document.querySelectorAll(".route");
 
 const pitchNotes = {
   defense: {
@@ -46,6 +54,11 @@ const cardRotations = ["-2deg", "1.5deg", "-1deg", "2deg"];
 
 window.addEventListener("load", () => {
   window.setTimeout(() => body.classList.add("loaded"), 450);
+
+  if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    window.setTimeout(() => target?.scrollIntoView({ block: "start" }), 250);
+  }
 });
 
 window.setTimeout(() => body.classList.add("loaded"), 1200);
@@ -82,6 +95,16 @@ window.addEventListener("pointermove", (event) => {
   const y = event.clientY / window.innerHeight - 0.5;
   latestMouseX = x * 28;
   latestMouseY = y * 18;
+
+  if (scoutBoard) {
+    scoutBoard.style.setProperty("--board-mx", `${x * 70}px`);
+    scoutBoard.style.setProperty("--board-my", `${y * 54}px`);
+  }
+
+  if (hero) {
+    hero.style.setProperty("--hero-mx", `${x * 90}px`);
+    hero.style.setProperty("--hero-my", `${y * 68}px`);
+  }
 });
 
 function updateScrollEffects() {
@@ -133,11 +156,53 @@ positions.forEach((position) => {
 
     positions.forEach((item) => item.classList.remove("active"));
     position.classList.add("active");
+    routeLines.forEach((route) => {
+      route.classList.toggle("active", route.dataset.route === role);
+    });
 
     pitchLabel.textContent = note.label;
     pitchTitle.textContent = note.title;
     pitchText.textContent = note.text;
   });
+});
+
+function setBoardLocked(isLocked) {
+  if (!scoutBoard) {
+    return;
+  }
+
+  scoutBoard.classList.toggle("is-locked", isLocked);
+  body.classList.toggle("board-locked", isLocked);
+  boardLock?.setAttribute("aria-expanded", String(isLocked));
+
+  if (isLocked) {
+    scoutBoard.scrollIntoView({ block: "center" });
+  }
+}
+
+function setHeroLocked(isLocked) {
+  if (!hero) {
+    return;
+  }
+
+  hero.classList.toggle("is-locked", isLocked);
+  body.classList.toggle("hero-locked", isLocked);
+  heroLock?.setAttribute("aria-expanded", String(isLocked));
+}
+
+heroLock?.addEventListener("click", () => setHeroLocked(true));
+heroUnlock?.addEventListener("click", () => setHeroLocked(false));
+heroJersey?.addEventListener("click", () => {
+  heroJersey.classList.toggle("is-flipped");
+});
+boardLock?.addEventListener("click", () => setBoardLocked(true));
+boardClose?.addEventListener("click", () => setBoardLocked(false));
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    setHeroLocked(false);
+    setBoardLocked(false);
+  }
 });
 
 cards.forEach((card) => {

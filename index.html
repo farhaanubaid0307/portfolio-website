@@ -42,6 +42,19 @@
           alt="A cartoon floodlit football stadium with a corner flag and pitch"
         />
         <div class="hero__shade" aria-hidden="true"></div>
+        <div class="hero__showpiece" id="heroShowpiece" aria-hidden="true">
+          <div class="hero-burst hero-burst--blue"></div>
+          <div class="hero-burst hero-burst--lime"></div>
+          <div class="hero-burst hero-burst--white"></div>
+          <button class="hero-jersey" type="button" id="heroJersey" aria-label="Swap front and back jersey focus">
+            <span class="shirt-model shirt-model--front">
+              <img src="assets/farhaan-shirt-front-cutout.png" alt="" />
+            </span>
+            <span class="shirt-model shirt-model--back">
+              <img src="assets/farhaan-shirt-back-cutout.png" alt="" />
+            </span>
+          </button>
+        </div>
         <div class="hero__content">
           <p class="eyebrow reveal">Bengaluru, Karnataka / Class of 2027</p>
           <h1 class="hero__title reveal">
@@ -54,9 +67,13 @@
           </p>
           <div class="hero__actions reveal" aria-label="Hero actions">
             <a href="#highlights" class="button button--primary">View Highlights</a>
+            <button class="button button--primary hero-lock" type="button" id="heroLock">
+              Tap to lock
+            </button>
             <a href="#scouting" class="button button--ghost">Scouting Report</a>
           </div>
         </div>
+        <button class="hero-unlock" type="button" id="heroUnlock">Back to scroll</button>
         <aside class="match-strip reveal" aria-label="Profile quick stats">
           <span>ICSE 99.4%</span>
           <span>PCMC 92%</span>
@@ -233,7 +250,7 @@
             </svg>
 
             <figure class="jersey-stage" aria-label="Farhaan number 8 jersey render">
-              <img src="assets/farhaan-jersey-render.png" alt="3D render of Farhaan's blue and black number 8 football jersey" />
+              <img src="assets/farhaan-shirt-back-cutout.png" alt="3D render of Farhaan's blue and black number 8 football jersey" />
             </figure>
 
             <button class="position active" style="--x: 50%; --y: 82%" data-role="defense">
