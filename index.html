@@ -8,10 +8,19 @@
       content="Farhaan Ubaid - student athlete, builder, and academy prospect portfolio."
     />
     <title>Farhaan Ubaid | Academy Prospect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="preloader" aria-hidden="true">
+      <figure class="preloader__jersey">
+        <img src="assets/farhaan-shirt-back-cutout.png" alt="" />
+      </figure>
       <div class="preloader__line"></div>
       <p>Academy profile loading</p>
     </div>
@@ -19,6 +28,9 @@
     <div class="scroll-meter" aria-hidden="true">
       <span></span>
     </div>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+    <div class="noise-overlay" aria-hidden="true"></div>
 
     <header class="site-header" aria-label="Primary navigation">
       <a class="brand" href="#top" aria-label="Farhaan Ubaid home">
@@ -27,7 +39,7 @@
       </a>
       <nav>
         <a href="#profile">Profile</a>
-        <a href="#attributes">Attributes</a>
+        <a href="#story-templates">Chapters</a>
         <a href="#highlights">Highlights</a>
         <a href="#career">Career</a>
         <a href="#contact">Contact</a>
@@ -36,26 +48,34 @@
 
     <main id="top">
       <section class="hero" id="profile" aria-label="Farhaan Ubaid introduction">
-        <img
-          class="hero__image"
-          src="assets/cartoon-football-hero.png"
-          alt="A cartoon floodlit football stadium with a corner flag and pitch"
-        />
+        <div class="ghost-pitch" aria-hidden="true">
+          <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice">
+            <rect x="40" y="20" width="920" height="560" stroke-width="2" />
+            <line x1="500" y1="20" x2="500" y2="580" stroke-width="2" />
+            <circle cx="500" cy="300" r="75" stroke-width="2" />
+            <circle cx="500" cy="300" r="4" fill="#FFFFFF" stroke="none" />
+            <rect x="40" y="160" width="160" height="280" stroke-width="2" />
+            <rect x="800" y="160" width="160" height="280" stroke-width="2" />
+            <rect x="40" y="220" width="70" height="160" stroke-width="2" />
+            <rect x="890" y="220" width="70" height="160" stroke-width="2" />
+            <path d="M40,20 Q40,60 80,60" stroke-width="2" />
+            <path d="M960,20 Q960,60 920,60" stroke-width="2" />
+            <path d="M40,580 Q40,540 80,540" stroke-width="2" />
+            <path d="M960,580 Q960,540 920,540" stroke-width="2" />
+          </svg>
+        </div>
+        <div class="hero-noise" aria-hidden="true"></div>
+        <div class="ghost-number" id="ghostNumber" aria-hidden="true">10</div>
         <div class="hero__shade" aria-hidden="true"></div>
         <div class="hero__showpiece" id="heroShowpiece" aria-hidden="true">
-          <button class="hero-jersey is-flipped" type="button" id="heroJersey" aria-label="Swap front and back jersey focus">
-            <span class="shirt-model shirt-model--front">
-              <img src="assets/farhaan-shirt-front-cutout.png" alt="" />
-            </span>
-            <span class="shirt-model shirt-model--back">
-              <img src="assets/farhaan-shirt-back-cutout.png" alt="" />
-            </span>
-          </button>
+          <figure class="hero-jersey">
+            <img src="assets/farhaan-shirt-back-cutout.png" alt="" />
+          </figure>
         </div>
         <div class="hero__content">
           <p class="eyebrow reveal">Bengaluru, Karnataka / Class of 2027</p>
           <h1 class="hero__title reveal">
-            <span>Farhaan</span>
+            <span class="weight-shift">Farhaan</span>
             <span>Ubaid</span>
           </h1>
           <p class="hero__statement reveal">
@@ -64,23 +84,16 @@
           </p>
           <div class="hero__actions reveal" aria-label="Hero actions">
             <a href="#highlights" class="button button--primary">View Highlights</a>
-            <button class="button button--primary hero-lock" type="button" id="heroLock">
-              Tap to lock
-            </button>
             <a href="#scouting" class="button button--ghost">Scouting Report</a>
           </div>
         </div>
-        <button class="hero-unlock" type="button" id="heroUnlock">Back to scroll</button>
-        <div class="football" aria-hidden="true">
-          <span></span>
-        </div>
-        <a class="scroll-cue" href="#split" aria-label="Scroll to profile split">
+        <a class="scroll-cue" href="#identity-strip" aria-label="Scroll to identity strip">
           <span></span>
           Scroll
         </a>
       </section>
 
-      <section class="identity-band" aria-label="Identity snapshot">
+      <section class="identity-band" id="identity-strip" aria-label="Identity snapshot">
         <div class="marquee" aria-hidden="true">
           <div>
             <span>Student Athlete</span>
@@ -97,6 +110,84 @@
             <span>Leadership</span>
             <span>Academics</span>
             <span>Teamwork</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="horizontal-story" id="story-templates" aria-label="Horizontal story templates">
+        <div class="horizontal-story__sticky">
+          <div class="horizontal-story__top">
+            <p class="section-kicker">Start / Portfolio Chapters</p>
+            <div class="horizontal-story__progress" aria-hidden="true">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="horizontal-story__track" id="storyTrack">
+            <article class="story-panel story-fifa-card">
+              <div class="trait-card__top">
+                <span>CM</span>
+                <strong>92</strong>
+              </div>
+              <h3>The Connector</h3>
+              <dl>
+                <div><dt>Team</dt><dd>Deens ECC</dd></div>
+                <div><dt>Role</dt><dd>Midfield / Builder</dd></div>
+                <div><dt>Signal</dt><dd>Discipline</dd></div>
+              </dl>
+            </article>
+
+            <article class="story-panel story-fifa-card story-fifa-card--blue">
+              <div class="trait-card__top">
+                <span>CAM</span>
+                <strong>94</strong>
+              </div>
+              <h3>The Builder</h3>
+              <dl>
+                <div><dt>Stack</dt><dd>Java / Python</dd></div>
+                <div><dt>Collab</dt><dd>Firebase API</dd></div>
+                <div><dt>Shape</dt><dd>Problem / proof</dd></div>
+              </dl>
+            </article>
+
+            <article class="story-panel story-fifa-card story-fifa-card--red">
+              <div class="trait-card__top">
+                <span>CAP</span>
+                <strong>95</strong>
+              </div>
+              <h3>The Captain</h3>
+              <dl>
+                <div><dt>Lead</dt><dd>Commerce Fest</dd></div>
+                <div><dt>Win</dt><dd>Entrepreneurship Fest</dd></div>
+                <div><dt>Use</dt><dd>Timeline article</dd></div>
+              </dl>
+            </article>
+
+            <article class="story-panel story-fifa-card story-fifa-card--white">
+              <div class="trait-card__top">
+                <span>ST</span>
+                <strong>99</strong>
+              </div>
+              <h3>The Finisher</h3>
+              <dl>
+                <div><dt>ICSE</dt><dd>99.4%</dd></div>
+                <div><dt>PCMC</dt><dd>92% current score</dd></div>
+                <div><dt>Result</dt><dd>Consistent</dd></div>
+              </dl>
+            </article>
+
+            <article class="story-panel story-fifa-card story-fifa-card--blue">
+              <div class="trait-card__top">
+                <span>DEF</span>
+                <strong>97</strong>
+              </div>
+              <h3>The Anchor</h3>
+              <dl>
+                <div><dt>Sport</dt><dd>Football team</dd></div>
+                <div><dt>State</dt><dd>U17 ICSE winners</dd></div>
+                <div><dt>Trait</dt><dd>Reliable</dd></div>
+              </dl>
+            </article>
           </div>
         </div>
       </section>
@@ -144,75 +235,10 @@
         </div>
       </section>
 
-      <section class="attributes section-shell" id="attributes" aria-label="Attributes">
-        <div class="section-kicker reveal">Attributes</div>
-        <div class="section-heading reveal">
-          <h2>FIFA-inspired cards, placed after the big intro.</h2>
-          <p>
-            The cards are a playful layer lower in the experience, so the first
-            impression stays cinematic and premium.
-          </p>
-        </div>
-
-        <div class="card-track" aria-label="Attribute cards">
-          <article class="trait-card reveal">
-            <div class="trait-card__top">
-              <span>CM</span>
-              <strong>92</strong>
-            </div>
-            <h3>The Connector</h3>
-            <dl>
-              <div><dt>Passing</dt><dd>Teamwork</dd></div>
-              <div><dt>Vision</dt><dd>Problem solving</dd></div>
-              <div><dt>Control</dt><dd>Communication</dd></div>
-            </dl>
-          </article>
-
-          <article class="trait-card trait-card--blue reveal">
-            <div class="trait-card__top">
-              <span>CAM</span>
-              <strong>94</strong>
-            </div>
-            <h3>The Builder</h3>
-            <dl>
-              <div><dt>Tools</dt><dd>Java, Python</dd></div>
-              <div><dt>Assist</dt><dd>Firebase API</dd></div>
-              <div><dt>Focus</dt><dd>Testing</dd></div>
-            </dl>
-          </article>
-
-          <article class="trait-card trait-card--red reveal">
-            <div class="trait-card__top">
-              <span>CAP</span>
-              <strong>95</strong>
-            </div>
-            <h3>The Captain</h3>
-            <dl>
-              <div><dt>Role</dt><dd>Event Head</dd></div>
-              <div><dt>Win</dt><dd>Fest winner</dd></div>
-              <div><dt>Energy</dt><dd>Leadership</dd></div>
-            </dl>
-          </article>
-
-          <article class="trait-card trait-card--white reveal">
-            <div class="trait-card__top">
-              <span>ST</span>
-              <strong>99</strong>
-            </div>
-            <h3>The Finisher</h3>
-            <dl>
-              <div><dt>ICSE</dt><dd>99.4%</dd></div>
-              <div><dt>PCMC</dt><dd>92%</dd></div>
-              <div><dt>Result</dt><dd>Consistent</dd></div>
-            </dl>
-          </article>
-        </div>
-      </section>
-
       <section class="pitch-section section-shell" id="position-map" aria-label="Interactive position map">
         <div class="section-kicker reveal">Position Map</div>
         <div class="section-heading reveal">
-          <h2>A locked scouting board built around the FARHAAN 8 jersey.</h2>
+          <h2>A locked scouting board built around Farhaan's role map.</h2>
           <p>
             Tap into the board, move through the pitch, and let each position
             switch the scouting note with animated routes and kit-color bursts.
@@ -220,12 +246,6 @@
         </div>
 
         <div class="pitch-layout reveal" id="scoutBoard">
-          <div class="pitch-lockbar" aria-label="Scouting board controls">
-            <span>FARHAAN 8 / Interactive scouting board</span>
-            <button class="board-lock" type="button" id="boardLock">Tap to lock</button>
-            <button class="board-close" type="button" id="boardClose">Back to scroll</button>
-          </div>
-
           <div class="pitch" role="group" aria-label="Portfolio position map">
             <div class="burst burst--blue" aria-hidden="true"></div>
             <div class="burst burst--lime" aria-hidden="true"></div>
@@ -238,10 +258,6 @@
               <path class="route route--attack" data-route="attack" d="M50 82 C56 61 55 43 50 27" />
               <path class="route route--captain" data-route="captain" d="M50 82 C47 70 47 59 50 50" />
             </svg>
-
-            <figure class="jersey-stage" aria-label="Farhaan number 8 jersey render">
-              <img src="assets/farhaan-shirt-back-cutout.png" alt="3D render of Farhaan's blue and black number 8 football jersey" />
-            </figure>
 
             <button class="position active" style="--x: 50%; --y: 82%" data-role="defense">
               <span>DEF</span>

@@ -2,20 +2,22 @@ const root = document.documentElement;
 const body = document.body;
 const meter = document.querySelector(".scroll-meter span");
 const hero = document.querySelector(".hero");
-const heroImage = document.querySelector(".hero__image");
-const heroJersey = document.getElementById("heroJersey");
-const heroLock = document.getElementById("heroLock");
-const heroUnlock = document.getElementById("heroUnlock");
-const football = document.querySelector(".football");
-const cards = document.querySelectorAll(".trait-card");
+const ghostNumber = document.getElementById("ghostNumber");
+const cursorDot = document.querySelector(".cursor-dot");
+const cursorRing = document.querySelector(".cursor-ring");
+const weightShift = document.querySelector(".weight-shift");
 const positions = document.querySelectorAll(".position");
 const scoutBoard = document.getElementById("scoutBoard");
-const boardLock = document.getElementById("boardLock");
-const boardClose = document.getElementById("boardClose");
 const pitchLabel = document.getElementById("pitchLabel");
 const pitchTitle = document.getElementById("pitchTitle");
 const pitchText = document.getElementById("pitchText");
 const routeLines = document.querySelectorAll(".route");
+const horizontalStory = document.querySelector(".horizontal-story");
+const horizontalTrack = document.querySelector(".horizontal-story__track");
+const horizontalProgress = document.querySelector(".horizontal-story__progress span");
+const tiltCards = document.querySelectorAll(".story-panel, .trait-card");
+const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+const loadStartedAt = performance.now();
 
 const pitchNotes = {
   defense: {
@@ -52,18 +54,78 @@ const pitchNotes = {
 
 const cardRotations = ["-2deg", "1.5deg", "-1deg", "2deg"];
 
-window.addEventListener("load", () => {
-  window.setTimeout(() => body.classList.add("loaded"), 450);
+function initCustomCursor() {
+  if (!cursorDot || !cursorRing || !finePointer.matches) {
+    return;
+  }
+
+  let mouseX = -100;
+  let mouseY = -100;
+  let ringX = -100;
+  let ringY = -100;
+  let isHovering = false;
+
+  document.addEventListener("pointermove", (event) => {
+    if (event.pointerType === "touch") {
+      return;
+    }
+
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+    cursorDot.classList.add("is-visible");
+    cursorRing.classList.add("is-visible");
+    cursorDot.style.transform = `translate3d(${mouseX - 3}px, ${mouseY - 3}px, 0)`;
+  });
+
+  function animateCursorRing() {
+    ringX += (mouseX - ringX) * 0.42;
+    ringY += (mouseY - ringY) * 0.42;
+    const offset = isHovering ? 21 : 12;
+    cursorRing.style.transform = `translate3d(${ringX - offset}px, ${ringY - offset}px, 0)`;
+    window.requestAnimationFrame(animateCursorRing);
+  }
+
+  animateCursorRing();
+
+  document.addEventListener("pointerdown", () => cursorDot.classList.add("is-clicking"));
+  document.addEventListener("pointerup", () => cursorDot.classList.remove("is-clicking"));
+
+  document.querySelectorAll("a, button, .trait-card, .story-panel, .highlight, .position").forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+      isHovering = true;
+      cursorRing.classList.add("is-hovering");
+    });
+
+    item.addEventListener("mouseleave", () => {
+      isHovering = false;
+      cursorRing.classList.remove("is-hovering");
+    });
+  });
+}
+
+initCustomCursor();
+
+function finishLoading() {
+  if (body.classList.contains("loaded")) {
+    return;
+  }
+
+  body.classList.add("loaded");
 
   if (window.location.hash) {
     const target = document.querySelector(window.location.hash);
     window.setTimeout(() => target?.scrollIntoView({ block: "start" }), 250);
   }
+}
+
+window.addEventListener("load", () => {
+  const elapsed = performance.now() - loadStartedAt;
+  window.setTimeout(finishLoading, Math.max(0, 1500 - elapsed));
 });
 
-window.setTimeout(() => body.classList.add("loaded"), 1200);
+window.setTimeout(finishLoading, 2400);
 
-cards.forEach((card, index) => {
+tiltCards.forEach((card, index) => {
   card.style.setProperty("--card-rotate", cardRotations[index % cardRotations.length]);
 });
 
@@ -84,17 +146,51 @@ const revealObserver = new IntersectionObserver(
 
 document.querySelectorAll(".reveal").forEach((item) => revealObserver.observe(item));
 
-let latestMouseX = 0;
-let latestMouseY = 0;
-let currentMouseX = 0;
-let currentMouseY = 0;
+let horizontalDistance = 0;
 let ticking = false;
+
+function isHorizontalNative() {
+  return window.matchMedia("(max-width: 760px), (prefers-reduced-motion: reduce)").matches;
+}
+
+function updateHorizontalMetrics() {
+  if (!horizontalStory || !horizontalTrack) {
+    return;
+  }
+
+  if (isHorizontalNative()) {
+    horizontalStory.style.removeProperty("height");
+    horizontalTrack.style.removeProperty("transform");
+    horizontalDistance = 0;
+    return;
+  }
+
+  horizontalDistance = Math.max(0, horizontalTrack.scrollWidth - window.innerWidth);
+  horizontalStory.style.height = `${window.innerHeight + horizontalDistance}px`;
+}
+
+function updateHorizontalStory() {
+  if (!horizontalStory || !horizontalTrack) {
+    return;
+  }
+
+  if (isHorizontalNative()) {
+    const scrollable = Math.max(1, horizontalTrack.scrollWidth - horizontalTrack.clientWidth);
+    const nativeProgress = horizontalTrack.scrollLeft / scrollable;
+    horizontalProgress?.style.setProperty("transform", `scaleX(${nativeProgress})`);
+    return;
+  }
+
+  const rect = horizontalStory.getBoundingClientRect();
+  const scrollable = Math.max(1, horizontalStory.offsetHeight - window.innerHeight);
+  const progress = Math.min(1, Math.max(0, -rect.top / scrollable));
+  horizontalTrack.style.transform = `translate3d(${-horizontalDistance * progress}px, 0, 0)`;
+  horizontalProgress?.style.setProperty("transform", `scaleX(${progress})`);
+}
 
 window.addEventListener("pointermove", (event) => {
   const x = event.clientX / window.innerWidth - 0.5;
   const y = event.clientY / window.innerHeight - 0.5;
-  latestMouseX = x * 28;
-  latestMouseY = y * 18;
 
   if (scoutBoard) {
     scoutBoard.style.setProperty("--board-mx", `${x * 70}px`);
@@ -104,6 +200,12 @@ window.addEventListener("pointermove", (event) => {
   if (hero) {
     hero.style.setProperty("--hero-mx", `${x * 90}px`);
     hero.style.setProperty("--hero-my", `${y * 68}px`);
+  }
+
+  if (weightShift) {
+    const weight = 620 + Math.round((event.clientX / window.innerWidth + event.clientY / window.innerHeight) * 140);
+    const clampedWeight = Math.min(900, Math.max(620, weight));
+    weightShift.style.fontVariationSettings = `"wght" ${clampedWeight}`;
   }
 });
 
@@ -116,19 +218,14 @@ function updateScrollEffects() {
     meter.style.width = `${progress * 100}%`;
   }
 
-  if (heroImage) {
-    const heroProgress = Math.min(1, scrollTop / Math.max(1, window.innerHeight));
-    heroImage.style.transform = `translateY(${heroProgress * 52}px) scale(${1.04 + heroProgress * 0.035})`;
+  if (ghostNumber && window.innerWidth > 760) {
+    const heroHeight = hero?.offsetHeight || window.innerHeight;
+    if (scrollTop <= heroHeight) {
+      ghostNumber.style.transform = `translateY(calc(-50% + ${scrollTop * 0.15}px))`;
+    }
   }
 
-  currentMouseX += (latestMouseX - currentMouseX) * 0.08;
-  currentMouseY += (latestMouseY - currentMouseY) * 0.08;
-
-  if (football) {
-    football.style.setProperty("--ball-x", `${currentMouseX}px`);
-    football.style.setProperty("--ball-y", `${currentMouseY}px`);
-    football.style.setProperty("--ball-rotate", `${scrollTop * 0.12}deg`);
-  }
+  updateHorizontalStory();
 
   ticking = false;
 }
@@ -141,8 +238,16 @@ function requestTick() {
 }
 
 window.addEventListener("scroll", requestTick, { passive: true });
-window.addEventListener("resize", requestTick);
-window.addEventListener("pointermove", requestTick, { passive: true });
+window.addEventListener("resize", () => {
+  updateHorizontalMetrics();
+  requestTick();
+});
+horizontalTrack?.addEventListener("scroll", () => {
+  if (isHorizontalNative()) {
+    updateHorizontalStory();
+  }
+}, { passive: true });
+updateHorizontalMetrics();
 requestTick();
 
 positions.forEach((position) => {
@@ -166,47 +271,12 @@ positions.forEach((position) => {
   });
 });
 
-function setBoardLocked(isLocked) {
-  if (!scoutBoard) {
-    return;
-  }
-
-  scoutBoard.classList.toggle("is-locked", isLocked);
-  body.classList.toggle("board-locked", isLocked);
-  boardLock?.setAttribute("aria-expanded", String(isLocked));
-
-  if (isLocked) {
-    scoutBoard.scrollIntoView({ block: "center" });
-  }
-}
-
-function setHeroLocked(isLocked) {
-  if (!hero) {
-    return;
-  }
-
-  hero.classList.toggle("is-locked", isLocked);
-  body.classList.toggle("hero-locked", isLocked);
-  heroLock?.setAttribute("aria-expanded", String(isLocked));
-}
-
-heroLock?.addEventListener("click", () => setHeroLocked(true));
-heroUnlock?.addEventListener("click", () => setHeroLocked(false));
-heroJersey?.addEventListener("click", () => {
-  heroJersey.classList.toggle("is-flipped");
-});
-boardLock?.addEventListener("click", () => setBoardLocked(true));
-boardClose?.addEventListener("click", () => setBoardLocked(false));
-
-window.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    setHeroLocked(false);
-    setBoardLocked(false);
-  }
-});
-
-cards.forEach((card) => {
+tiltCards.forEach((card) => {
   card.addEventListener("pointermove", (event) => {
+    if (event.pointerType === "touch") {
+      return;
+    }
+
     const rect = card.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width - 0.5;
     const y = (event.clientY - rect.top) / rect.height - 0.5;
