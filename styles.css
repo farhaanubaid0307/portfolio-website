@@ -311,8 +311,12 @@ body.loaded .preloader__jersey {
 .brand span {
   display: inline-block;
   color: var(--lime);
-  font-size: 0.84rem;
-  font-weight: 800;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  white-space: nowrap;
 }
 
 nav {
