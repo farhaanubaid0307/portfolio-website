@@ -305,29 +305,14 @@ body.loaded .preloader__jersey {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
   min-width: 0;
 }
 
 .brand span {
-  display: grid;
-  width: 2.25rem;
-  height: 2.25rem;
-  place-items: center;
-  border: 1px solid rgba(200, 255, 53, 0.46);
-  border-radius: 50%;
+  display: inline-block;
   color: var(--lime);
   font-size: 0.84rem;
   font-weight: 800;
-}
-
-.brand small {
-  color: var(--muted);
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  white-space: nowrap;
 }
 
 nav {
@@ -853,7 +838,6 @@ nav a:focus-visible {
 .split-panel p,
 .highlight p,
 .timeline-item p,
-.trophy p,
 .scouting-card p,
 .contact-note,
 .pitch-note p {
@@ -1264,37 +1248,53 @@ nav a:focus-visible {
   font-size: 1.2rem;
 }
 
-.trophy-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
+.career {
+  padding-bottom: 3.25rem;
 }
 
-.trophy {
-  min-height: 15rem;
-  padding: 1rem;
-  border: 1px solid rgba(244, 241, 232, 0.14);
-  border-radius: 8px;
-  background: rgba(244, 241, 232, 0.05);
-}
-
-.trophy span {
-  color: var(--lime);
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 2.8rem;
-  font-weight: 400;
-}
-
-.trophy h3 {
-  margin: 4rem 0 0.6rem;
-  font-size: 1.1rem;
-  font-weight: 650;
+.scouting {
+  padding-top: 2.25rem;
 }
 
 .scouting-card,
 .contact-panel {
   padding: 1.3rem;
+}
+
+.scouting-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.scouting-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(110deg, transparent 0 38%, rgba(200, 245, 60, 0.14) 48%, transparent 58%),
+    radial-gradient(circle at var(--scout-x, 70%) var(--scout-y, 30%), rgba(200, 245, 60, 0.12), transparent 17rem);
+  opacity: 0.72;
+  transform: translateX(-36%);
+  transition: opacity 220ms ease;
+  animation: scoutSweep 6.5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  pointer-events: none;
+}
+
+.scouting-card::after {
+  content: "";
+  position: absolute;
+  inset: 0.85rem;
+  z-index: -1;
+  border: 1px solid rgba(244, 239, 228, 0.12);
+  border-radius: 6px;
+  opacity: 0.62;
+  pointer-events: none;
+}
+
+.scouting-card:hover::before {
+  opacity: 1;
 }
 
 .scouting-card h2,
@@ -1313,6 +1313,18 @@ nav a:focus-visible {
   flex-wrap: wrap;
   gap: 0.55rem;
   margin-top: 1.5rem;
+}
+
+.scouting-tags span {
+  animation: tagPulse 4.8s ease-in-out infinite;
+}
+
+.scouting-tags span:nth-child(2n) {
+  animation-delay: 420ms;
+}
+
+.scouting-tags span:nth-child(3n) {
+  animation-delay: 820ms;
 }
 
 .contact {
@@ -1381,6 +1393,31 @@ nav a:focus-visible {
   50% {
     border-radius: 58% 42% 44% 56% / 54% 38% 62% 46%;
     transform: translate3d(calc(var(--board-mx) * 0.26), calc(var(--board-my) * 0.2), 0) rotate(18deg) scale(1.08);
+  }
+}
+
+@keyframes scoutSweep {
+  0%,
+  38% {
+    transform: translateX(-46%);
+  }
+  70%,
+  100% {
+    transform: translateX(46%);
+  }
+}
+
+@keyframes tagPulse {
+  0%,
+  100% {
+    border-color: rgba(244, 241, 232, 0.18);
+    color: rgba(244, 241, 232, 0.78);
+    transform: translateY(0);
+  }
+  50% {
+    border-color: rgba(200, 245, 60, 0.48);
+    color: rgba(244, 239, 228, 0.92);
+    transform: translateY(-0.08rem);
   }
 }
 
@@ -1464,8 +1501,7 @@ nav a:focus-visible {
     grid-template-columns: 1fr;
   }
 
-  .split-grid,
-  .trophy-grid {
+  .split-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1476,10 +1512,6 @@ nav a:focus-visible {
     top: 0.55rem;
     width: min(21rem, calc(100% - 1rem));
     padding: 0.58rem;
-  }
-
-  .brand small {
-    display: none;
   }
 
   nav {
@@ -1595,14 +1627,21 @@ nav a:focus-visible {
     padding: 5rem 0;
   }
 
+  .career {
+    padding-bottom: 2.75rem;
+  }
+
+  .scouting {
+    padding-top: 1.25rem;
+  }
+
   .section-heading h2,
   .scouting-card h2,
   .contact-panel h2 {
     font-size: 2.45rem;
   }
 
-  .split-grid,
-  .trophy-grid {
+  .split-grid {
     grid-template-columns: 1fr;
   }
 

@@ -15,6 +15,7 @@ const routeLines = document.querySelectorAll(".route");
 const horizontalStory = document.querySelector(".horizontal-story");
 const horizontalTrack = document.querySelector(".horizontal-story__track");
 const horizontalProgress = document.querySelector(".horizontal-story__progress span");
+const scoutingCard = document.querySelector(".scouting-card");
 const tiltCards = document.querySelectorAll(".story-panel, .trait-card");
 const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 const loadStartedAt = performance.now();
@@ -206,6 +207,21 @@ window.addEventListener("pointermove", (event) => {
     const weight = 620 + Math.round((event.clientX / window.innerWidth + event.clientY / window.innerHeight) * 140);
     const clampedWeight = Math.min(900, Math.max(620, weight));
     weightShift.style.fontVariationSettings = `"wght" ${clampedWeight}`;
+  }
+
+  if (scoutingCard) {
+    const rect = scoutingCard.getBoundingClientRect();
+    if (
+      event.clientX >= rect.left &&
+      event.clientX <= rect.right &&
+      event.clientY >= rect.top &&
+      event.clientY <= rect.bottom
+    ) {
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      scoutingCard.style.setProperty("--scout-x", `${x}%`);
+      scoutingCard.style.setProperty("--scout-y", `${y}%`);
+    }
   }
 });
 
