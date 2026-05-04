@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Farhaan Ubaid - student athlete, builder, and academy prospect portfolio."
+      content="Farhaan Ubaid - student portfolio for academics, leadership, sport, and project work."
     />
-    <title>Farhaan Ubaid | Academy Prospect</title>
+    <title>Farhaan Ubaid | Student Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,11 +18,12 @@
   </head>
   <body>
     <div class="preloader" aria-hidden="true">
-      <figure class="preloader__jersey">
-        <img src="assets/farhaan-shirt-back-cutout.png" alt="" />
-      </figure>
+      <div class="preloader__mark">
+        <span>01</span>
+        <strong>Farhaan Ubaid</strong>
+      </div>
       <div class="preloader__line"></div>
-      <p>Academy profile loading</p>
+      <p>Student profile loading</p>
     </div>
 
     <div class="scroll-meter" aria-hidden="true">
@@ -37,16 +38,26 @@
         <span>Farhaan Ubaid</span>
       </a>
       <nav>
-        <a href="#profile">Profile</a>
-        <a href="#story-templates">Chapters</a>
-        <a href="#highlights">Highlights</a>
-        <a href="#career">Career</a>
-        <a href="#contact">Contact</a>
+        <a href="#profile" data-section-link><span>01</span> Profile</a>
+        <a href="#about" data-section-link><span>02</span> About</a>
+        <a href="#chapters" data-section-link><span>03</span> Chapters</a>
+        <a href="#experience" data-section-link><span>04</span> Experience</a>
+        <a href="#projects" data-section-link><span>05</span> Projects</a>
+        <a href="#skills" data-section-link><span>06</span> Skills</a>
+        <a href="#contact" data-section-link><span>07</span> Contact</a>
       </nav>
     </header>
 
+    <nav class="mobile-section-nav" aria-label="Mobile section navigation">
+      <a href="#profile" data-section-link><span>01</span><strong>Profile</strong></a>
+      <a href="#about" data-section-link><span>02</span><strong>About</strong></a>
+      <a href="#projects" data-section-link><span>05</span><strong>Projects</strong></a>
+      <a href="#contact" data-section-link><span>07</span><strong>Contact</strong></a>
+    </nav>
+
     <main id="top">
       <section class="hero" id="profile" aria-label="Farhaan Ubaid introduction">
+        <canvas class="particle-canvas" id="particleCanvas" aria-hidden="true"></canvas>
         <div class="ghost-pitch" aria-hidden="true">
           <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice">
             <rect x="40" y="20" width="920" height="560" stroke-width="2" />
@@ -66,30 +77,92 @@
         <div class="hero-noise" aria-hidden="true"></div>
         <div class="ghost-number" id="ghostNumber" aria-hidden="true">10</div>
         <div class="hero__shade" aria-hidden="true"></div>
-        <div class="hero__showpiece" id="heroShowpiece" aria-hidden="true">
-          <figure class="hero-jersey">
-            <img src="assets/farhaan-shirt-back-cutout.png" alt="" />
-          </figure>
-        </div>
         <div class="hero__content">
-          <p class="eyebrow reveal">Bengaluru, Karnataka / Class of 2027</p>
-          <h1 class="hero__title reveal">
-            <span class="weight-shift">Farhaan</span>
-            <span>Ubaid</span>
-          </h1>
-          <p class="hero__statement reveal">
-            Student athlete with a footballer's discipline, a builder's curiosity,
-            and a team-first way of working.
-          </p>
-          <div class="hero__actions reveal" aria-label="Hero actions">
-            <a href="#highlights" class="button button--primary">View Highlights</a>
-            <a href="#scouting" class="button button--ghost">Scouting Report</a>
+          <div class="hero__copy">
+            <p class="eyebrow reveal">Bengaluru, Karnataka / Class of 2027</p>
+            <h1 class="hero__title reveal">
+              <span class="weight-shift">Farhaan</span>
+              <span>Ubaid</span>
+            </h1>
+            <p class="hero__statement reveal">
+              A student profile shaped by academic consistency, leadership,
+              sport discipline, and project-building curiosity.
+            </p>
+            <div class="hero__stats reveal" aria-label="Profile snapshot">
+              <span>99.4% ICSE</span>
+              <span>92% PCMC</span>
+              <span>Class of 2027</span>
+              <span>Student Athlete</span>
+            </div>
+            <div class="hero__actions reveal" aria-label="Hero actions">
+              <a href="#about" class="button button--primary">View Profile</a>
+              <a href="#projects" class="button button--ghost">View Projects</a>
+            </div>
           </div>
         </div>
-        <a class="scroll-cue" href="#identity-strip" aria-label="Scroll to identity strip">
+        <a class="scroll-cue" href="#about" aria-label="Scroll to about section">
           <span></span>
           Scroll
         </a>
+      </section>
+
+      <section class="about section-shell" id="about" aria-label="About Farhaan">
+        <div class="section-kicker reveal">02 / About</div>
+        <div class="section-heading reveal">
+          <h2>A student profile built around consistency and initiative.</h2>
+          <p>
+            Farhaan's strongest story is the balance: high academic performance,
+            competitive sport habits, event leadership, and a willingness to build
+            useful projects with clear ownership.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <article class="about-card reveal">
+            <span>01</span>
+            <h3>Academics</h3>
+            <p>
+              Class X ICSE 99.4% and Class XII PCMC at a 92% current score,
+              showing a steady academic base for the next stage.
+            </p>
+          </article>
+
+          <article class="about-card reveal">
+            <span>02</span>
+            <h3>Student-athlete discipline</h3>
+            <p>
+              Football and volleyball experience bring structure, feedback loops,
+              pressure management, and a team-first rhythm into daily work.
+            </p>
+          </article>
+
+          <article class="about-card reveal">
+            <span>03</span>
+            <h3>Leadership</h3>
+            <p>
+              Commerce Fest event head, entrepreneurship fest winner, and future
+              event responsibilities create a clear leadership thread.
+            </p>
+          </article>
+
+          <article class="about-card reveal">
+            <span>04</span>
+            <h3>Project curiosity</h3>
+            <p>
+              Java, Python basics, Firebase collaboration, testing, and AI-assisted
+              prototyping show a practical builder mindset.
+            </p>
+          </article>
+        </div>
+
+        <div class="about-stat-grid reveal" aria-label="Quick profile facts">
+          <span>Class of 2027</span>
+          <span>99.4% ICSE</span>
+          <span>92% PCMC</span>
+          <span>Bengaluru</span>
+          <span>Football</span>
+          <span>Builder</span>
+        </div>
       </section>
 
       <section class="identity-band" id="identity-strip" aria-label="Identity snapshot">
@@ -113,124 +186,130 @@
         </div>
       </section>
 
-      <section class="horizontal-story" id="story-templates" aria-label="Horizontal story templates">
+      <section class="horizontal-story" id="chapters" aria-label="Portfolio chapters">
         <div class="horizontal-story__sticky">
           <div class="horizontal-story__top">
-            <p class="section-kicker">Start / Portfolio Chapters</p>
+            <p class="section-kicker">03 / Portfolio Chapters</p>
             <div class="horizontal-story__progress" aria-hidden="true">
               <span></span>
             </div>
           </div>
 
           <div class="horizontal-story__track" id="storyTrack">
-            <article class="story-panel story-fifa-card">
+            <article class="story-panel chapter-card reveal">
               <div class="trait-card__top">
-                <span>CM</span>
-                <strong>92</strong>
+                <span>01</span>
+                <strong>Student</strong>
               </div>
-              <h3>The Connector</h3>
+              <h3>The Student</h3>
               <dl>
-                <div><dt>Team</dt><dd>Deens ECC</dd></div>
-                <div><dt>Role</dt><dd>Midfield / Builder</dd></div>
-                <div><dt>Signal</dt><dd>Discipline</dd></div>
+                <div><dt>Base</dt><dd>99.4% ICSE</dd></div>
+                <div><dt>Current</dt><dd>92% PCMC</dd></div>
+                <div><dt>Signal</dt><dd>Consistency</dd></div>
               </dl>
             </article>
 
-            <article class="story-panel story-fifa-card story-fifa-card--blue">
+            <article class="story-panel chapter-card chapter-card--blue reveal">
               <div class="trait-card__top">
-                <span>CAM</span>
-                <strong>94</strong>
+                <span>02</span>
+                <strong>Athlete</strong>
+              </div>
+              <h3>The Athlete</h3>
+              <dl>
+                <div><dt>Sport</dt><dd>Football</dd></div>
+                <div><dt>Team</dt><dd>School squads</dd></div>
+                <div><dt>Trait</dt><dd>Pressure habits</dd></div>
+              </dl>
+            </article>
+
+            <article class="story-panel chapter-card chapter-card--red reveal">
+              <div class="trait-card__top">
+                <span>03</span>
+                <strong>Builder</strong>
               </div>
               <h3>The Builder</h3>
               <dl>
                 <div><dt>Stack</dt><dd>Java / Python</dd></div>
                 <div><dt>Collab</dt><dd>Firebase API</dd></div>
-                <div><dt>Shape</dt><dd>Problem / proof</dd></div>
+                <div><dt>Mode</dt><dd>AI-assisted prototypes</dd></div>
               </dl>
             </article>
 
-            <article class="story-panel story-fifa-card story-fifa-card--red">
+            <article class="story-panel chapter-card chapter-card--white reveal">
               <div class="trait-card__top">
-                <span>CAP</span>
-                <strong>95</strong>
+                <span>04</span>
+                <strong>Leader</strong>
               </div>
-              <h3>The Captain</h3>
+              <h3>The Leader</h3>
               <dl>
-                <div><dt>Lead</dt><dd>Commerce Fest</dd></div>
-                <div><dt>Win</dt><dd>Entrepreneurship Fest</dd></div>
-                <div><dt>Use</dt><dd>Timeline article</dd></div>
+                <div><dt>Event</dt><dd>Commerce Fest</dd></div>
+                <div><dt>Result</dt><dd>Entrepreneurship win</dd></div>
+                <div><dt>Signal</dt><dd>Ownership</dd></div>
               </dl>
             </article>
 
-            <article class="story-panel story-fifa-card story-fifa-card--white">
+            <article class="story-panel chapter-card chapter-card--green reveal">
               <div class="trait-card__top">
-                <span>ST</span>
-                <strong>99</strong>
+                <span>05</span>
+                <strong>Teammate</strong>
               </div>
-              <h3>The Finisher</h3>
+              <h3>The Teammate</h3>
               <dl>
-                <div><dt>ICSE</dt><dd>99.4%</dd></div>
-                <div><dt>PCMC</dt><dd>92% current score</dd></div>
-                <div><dt>Result</dt><dd>Consistent</dd></div>
-              </dl>
-            </article>
-
-            <article class="story-panel story-fifa-card story-fifa-card--blue">
-              <div class="trait-card__top">
-                <span>DEF</span>
-                <strong>97</strong>
-              </div>
-              <h3>The Anchor</h3>
-              <dl>
-                <div><dt>Sport</dt><dd>Football team</dd></div>
+                <div><dt>Role</dt><dd>Connector</dd></div>
                 <div><dt>State</dt><dd>U17 ICSE winners</dd></div>
-                <div><dt>Trait</dt><dd>Reliable</dd></div>
+                <div><dt>Trait</dt><dd>Reliable contributor</dd></div>
               </dl>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="split-section section-shell" id="split" aria-label="On field and off field">
-        <div class="section-kicker reveal">Profile Split</div>
+      <section class="career section-shell" id="experience" aria-label="Experience timeline">
+        <div class="section-kicker reveal">04 / Experience</div>
         <div class="section-heading reveal">
-          <h2>On field sharpness. Off field execution.</h2>
+          <h2>Education, leadership, and sport in one forward timeline.</h2>
           <p>
-            The portfolio works like an athlete profile: the left side carries the
-            sport, pressure, and team energy; the right side carries academics,
-            projects, and leadership.
+            A horizontal progression of academic milestones, team results, and
+            project moments that show steady growth through school.
           </p>
         </div>
 
-        <div class="split-grid">
-          <article class="split-panel split-panel--field reveal">
-            <div class="panel-marker">On Field</div>
-            <h3>Competitive rhythm</h3>
-            <p>
-              Football school team, volleyball school team, and Karnataka U17 ICSE
-              state winners with Greenwood High.
-            </p>
-            <ul>
-              <li>Football School Team, Deens</li>
-              <li>Volleyball School Team, Class XI</li>
-              <li>Karnataka Football State U17 ICSE Winners</li>
-            </ul>
-          </article>
-
-          <article class="split-panel split-panel--studio reveal">
-            <div class="panel-marker">Off Field</div>
-            <h3>Builder mindset</h3>
-            <p>
-              Class XII PCMC student at Deens ECC with a 92% current score,
-              strong Class X result, and project experience across Firebase,
-              testing, and AI-assisted prototyping.
-            </p>
-            <ul>
-              <li>Class X ICSE: 99.4%</li>
-              <li>Class XII PCMC: 92% current score</li>
-              <li>Java, Python basics, Firebase collaboration</li>
-            </ul>
-          </article>
+        <div class="timeline-shell reveal">
+          <div class="timeline-progress" aria-hidden="true">
+            <span></span>
+          </div>
+          <div class="timeline" id="experienceTimeline" tabindex="0" aria-label="Swipe through experience milestones">
+            <article class="timeline-item">
+              <span>2025</span>
+              <h3>Class X ICSE</h3>
+              <p>Scored 99.4%, setting a strong academic base for senior school.</p>
+            </article>
+            <article class="timeline-item">
+              <span>2025</span>
+              <h3>U17 Football State Winners</h3>
+              <p>Karnataka Football State U17 ICSE winners with Greenwood High.</p>
+            </article>
+            <article class="timeline-item">
+              <span>2025</span>
+              <h3>Commerce Fest / Leadership</h3>
+              <p>Event-head responsibility and entrepreneurship fest recognition.</p>
+            </article>
+            <article class="timeline-item">
+              <span>2026</span>
+              <h3>Science Fair Finalist</h3>
+              <p>CBSE Regional Science Fair finalist through a farmer-oriented app prototype.</p>
+            </article>
+            <article class="timeline-item">
+              <span>2026</span>
+              <h3>Class XII PCMC</h3>
+              <p>Currently tracking at 92% while balancing sport and project work.</p>
+            </article>
+            <article class="timeline-item">
+              <span>2027</span>
+              <h3>Expected Graduation</h3>
+              <p>Preparing the next portfolio chapter from Bengaluru as a student builder.</p>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -240,7 +319,7 @@
           <h2>A locked scouting board built around Farhaan's role map.</h2>
           <p>
             Tap into the board, move through the pitch, and let each position
-            switch the scouting note with animated routes and kit-color bursts.
+            switch the scouting note with animated routes and accent bursts.
           </p>
         </div>
 
@@ -286,10 +365,10 @@
         </div>
       </section>
 
-      <section class="highlights section-shell" id="highlights" aria-label="Project highlights">
-        <div class="section-kicker reveal">Highlight Reel</div>
+      <section class="highlights section-shell" id="projects" aria-label="Project highlights">
+        <div class="section-kicker reveal">05 / Projects</div>
         <div class="section-heading reveal">
-          <h2>Projects framed like match highlights.</h2>
+          <h2>Useful school projects, framed with honest contribution.</h2>
           <p>
             The portfolio stays honest about AI-assisted work while still showing
             ownership, teamwork, and the result.
@@ -297,16 +376,20 @@
         </div>
 
         <div class="highlight-list">
-          <article class="highlight reveal">
+          <article class="highlight project-card reveal" tabindex="0">
             <div class="highlight__meta">
               <span>January 2026</span>
               <span>Computer Class Project</span>
             </div>
-            <h3>Teacher Time-Efficiency Game</h3>
-            <p>
-              Helped integrate Firebase API support for real-time leaderboard
-              syncing and led testing to catch bugs and keep scores accurate.
-            </p>
+            <div class="project-card__body">
+              <h3>Teacher Time-Efficiency Game</h3>
+              <dl class="project-facts">
+                <div><dt>Context</dt><dd>Class project built to reduce repetitive teacher workflow.</dd></div>
+                <div><dt>Role</dt><dd>Team contributor focused on Firebase and testing support.</dd></div>
+                <div><dt>Contribution</dt><dd>Helped integrate leaderboard syncing and validated score accuracy.</dd></div>
+                <div><dt>Outcome</dt><dd>More reliable classroom prototype with clearer feedback loops.</dd></div>
+              </dl>
+            </div>
             <div class="highlight__tags">
               <span>Firebase</span>
               <span>Testing</span>
@@ -314,17 +397,20 @@
             </div>
           </article>
 
-          <article class="highlight reveal">
+          <article class="highlight project-card reveal" tabindex="0">
             <div class="highlight__meta">
               <span>November 2025</span>
               <span>Science Fair Team Project</span>
             </div>
-            <h3>Farmer Oriented App</h3>
-            <p>
-              AI-assisted prototype for Karnataka crop recommendations based on
-              soil type and farm factors. Strong portfolio option when presented
-              as a team prototype with clear process and finalist recognition.
-            </p>
+            <div class="project-card__body">
+              <h3>Farmer Oriented App</h3>
+              <dl class="project-facts">
+                <div><dt>Context</dt><dd>Team prototype for Karnataka crop recommendations.</dd></div>
+                <div><dt>Role</dt><dd>Contributed to ideation, testing, and project presentation.</dd></div>
+                <div><dt>Contribution</dt><dd>Used AI assistance to explore crop logic while keeping the work framed as a prototype.</dd></div>
+                <div><dt>Outcome</dt><dd>CBSE Regional Science Fair finalist with a clear social-use case.</dd></div>
+              </dl>
+            </div>
             <div class="highlight__tags">
               <span>AI-assisted</span>
               <span>Prototype</span>
@@ -334,37 +420,37 @@
         </div>
       </section>
 
-      <section class="career section-shell" id="career" aria-label="Career timeline">
-        <div class="section-kicker reveal">Career Path</div>
+      <section class="skills section-shell" id="skills" aria-label="Skills">
+        <div class="section-kicker reveal">06 / Skills</div>
         <div class="section-heading reveal">
-          <h2>Education, leadership, and sport in one season arc.</h2>
+          <h2>Grounded strengths with school-level proof behind them.</h2>
+          <p>
+            The strengths are intentionally grounded: developing technical range,
+            dependable academic habits, and collaboration sharpened through sport
+            and events.
+          </p>
         </div>
 
-        <div class="timeline">
-          <article class="timeline-item reveal">
-            <span>2025</span>
-            <h3>Class X ICSE</h3>
-            <p>Scored 99.4%, setting the academic base for the next stage.</p>
+        <div class="skills-grid reveal" aria-label="Skill summary">
+          <article class="skill-card">
+            <span>01</span>
+            <h3>Academics</h3>
+            <p>Strong ICSE foundation and current PCMC performance, with consistency as the main signal.</p>
           </article>
-          <article class="timeline-item reveal">
-            <span>2025</span>
-            <h3>U17 State Winners</h3>
-            <p>Karnataka Football State U17 ICSE winners with Greenwood High.</p>
+          <article class="skill-card">
+            <span>02</span>
+            <h3>Technical</h3>
+            <p>Java, Python basics, Firebase collaboration, testing, and AI-assisted prototyping at school-project level.</p>
           </article>
-          <article class="timeline-item reveal">
-            <span>2025</span>
-            <h3>Entrepreneurship Fest Winner</h3>
-            <p>Commerce Fest event head and entrepreneurship fest winner at Deens.</p>
+          <article class="skill-card">
+            <span>03</span>
+            <h3>Leadership</h3>
+            <p>Event ownership, entrepreneurship fest work, and accountability in team settings.</p>
           </article>
-          <article class="timeline-item reveal">
-            <span>2026</span>
-            <h3>Science Fair Finalist</h3>
-            <p>CBSE Regional Science Fair finalist for the farming-oriented app.</p>
-          </article>
-          <article class="timeline-item reveal">
-            <span>2027</span>
-            <h3>Expected Graduation</h3>
-            <p>Class XII PCMC at Deens ECC, currently at 92%.</p>
+          <article class="skill-card">
+            <span>04</span>
+            <h3>Collaboration</h3>
+            <p>Team-first project contribution, testing support, sport habits, and clear handoffs.</p>
           </article>
         </div>
       </section>
@@ -392,14 +478,15 @@
 
       <section class="contact section-shell" id="contact" aria-label="Contact">
         <div class="contact-panel reveal">
-          <p class="section-kicker">Contact Agent</p>
+          <canvas class="contact-particles" id="contactParticles" aria-hidden="true"></canvas>
+          <p class="section-kicker">07 / Contact</p>
           <h2>Open for school projects, collaborations, and creative builds.</h2>
           <div class="contact-actions">
             <a class="button button--primary" href="mailto:farhaanubaid406@gmail.com">
               Email Farhaan
             </a>
           </div>
-          <p class="contact-note">Bengaluru, Karnataka / English, Assamese, Hindi understanding</p>
+          <p class="contact-note">Bengaluru, Karnataka / Available for school collaborations, prototypes, and creative builds / English, Assamese, Hindi understanding</p>
         </div>
       </section>
     </main>
