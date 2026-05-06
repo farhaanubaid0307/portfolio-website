@@ -976,29 +976,20 @@ nav a.is-active span {
   padding: 1.1rem;
   border: 1px solid rgba(244, 241, 232, 0.14);
   border-radius: 8px;
-  background:
-    linear-gradient(180deg, rgba(244, 241, 232, 0.1), rgba(244, 241, 232, 0.035)),
-    rgba(22, 38, 25, 0.52);
+  background: rgba(16, 28, 19, 0.9);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(20px);
+  backdrop-filter: none;
   transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
 }
 
 .about-card:hover {
   border-color: rgba(200, 245, 60, 0.45);
-  background:
-    linear-gradient(180deg, rgba(200, 245, 60, 0.11), rgba(244, 241, 232, 0.04)),
-    rgba(22, 38, 25, 0.62);
+  background: rgba(18, 34, 22, 0.94);
   transform: translateY(-0.35rem);
 }
 
 .about-card::before {
-  content: "";
-  position: absolute;
-  inset: 0.7rem;
-  border: 1px solid rgba(244, 241, 232, 0.1);
-  border-radius: 6px;
-  pointer-events: none;
+  content: none;
 }
 
 .about-card span {
@@ -1434,10 +1425,11 @@ nav a.is-active span {
   gap: 1rem;
   overflow-x: auto;
   padding: 3rem 1.1rem 1.1rem;
-  scroll-snap-type: x mandatory;
   scrollbar-width: none;
   cursor: grab;
   overscroll-behavior-inline: contain;
+  scroll-behavior: auto;
+  touch-action: pan-x;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -1447,7 +1439,7 @@ nav a.is-active span {
 
 .timeline-shell .timeline.is-dragging {
   cursor: grabbing;
-  scroll-snap-type: none;
+  user-select: none;
 }
 
 .timeline-shell::after {
@@ -1500,7 +1492,6 @@ nav a.is-active span {
   grid-template-columns: 1fr;
   min-height: 14rem;
   padding: 1.15rem;
-  scroll-snap-align: start;
   background:
     radial-gradient(circle at 85% 12%, rgba(200, 245, 60, 0.12), transparent 8rem),
     rgba(244, 241, 232, 0.045);
@@ -1600,31 +1591,39 @@ nav a.is-active span {
   position: relative;
   min-height: 18rem;
   overflow: hidden;
+  isolation: isolate;
   border: 1px solid rgba(244, 241, 232, 0.14);
   border-radius: 8px;
   padding: 1.1rem;
   background:
-    linear-gradient(180deg, rgba(244, 241, 232, 0.08), rgba(244, 241, 232, 0.025)),
-    rgba(22, 38, 25, 0.52);
+    radial-gradient(circle at 88% 14%, rgba(200, 245, 60, 0.13), transparent 11rem),
+    radial-gradient(circle at 18% 88%, rgba(23, 137, 215, 0.1), transparent 12rem),
+    linear-gradient(145deg, rgba(244, 241, 232, 0.09), rgba(244, 241, 232, 0.018) 54%, rgba(200, 245, 60, 0.045)),
+    rgba(16, 28, 19, 0.68);
   box-shadow: var(--shadow);
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
 }
 
 .skill-card:hover {
   border-color: rgba(200, 245, 60, 0.42);
   background:
-    radial-gradient(circle at 86% 18%, rgba(23, 137, 215, 0.16), transparent 10rem),
-    rgba(22, 38, 25, 0.62);
+    radial-gradient(circle at 88% 14%, rgba(200, 245, 60, 0.17), transparent 11rem),
+    radial-gradient(circle at 18% 88%, rgba(23, 137, 215, 0.13), transparent 12rem),
+    linear-gradient(145deg, rgba(244, 241, 232, 0.11), rgba(244, 241, 232, 0.025) 54%, rgba(200, 245, 60, 0.06)),
+    rgba(18, 34, 22, 0.74);
   transform: translateY(-0.32rem);
 }
 
 .skill-card::before {
   content: "";
   position: absolute;
-  inset: 0.7rem;
-  border: 1px solid rgba(244, 241, 232, 0.1);
-  border-radius: 6px;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(110deg, transparent 8%, rgba(244, 241, 232, 0.08) 46%, transparent 82%);
+  opacity: 0.42;
   pointer-events: none;
 }
 
@@ -1699,12 +1698,11 @@ nav a.is-active span {
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(110deg, transparent 0 38%, rgba(200, 245, 60, 0.14) 48%, transparent 58%),
-    radial-gradient(circle at var(--scout-x, 70%) var(--scout-y, 30%), rgba(200, 245, 60, 0.12), transparent 17rem);
-  opacity: 0.72;
-  transform: translateX(-36%);
+    radial-gradient(circle at var(--scout-x, 70%) var(--scout-y, 30%), rgba(200, 245, 60, 0.14), transparent 18rem),
+    radial-gradient(circle at 82% 24%, rgba(23, 137, 215, 0.1), transparent 22rem),
+    linear-gradient(135deg, rgba(244, 241, 232, 0.07), rgba(244, 241, 232, 0.015));
+  opacity: 0.86;
   transition: opacity 220ms ease;
-  animation: scoutSweep 6.5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
   pointer-events: none;
 }
 
@@ -1860,17 +1858,6 @@ main > section.section-entered .section-kicker {
   50% {
     border-radius: 58% 42% 44% 56% / 54% 38% 62% 46%;
     transform: translate3d(calc(var(--board-mx) * 0.26), calc(var(--board-my) * 0.2), 0) rotate(18deg) scale(1.08);
-  }
-}
-
-@keyframes scoutSweep {
-  0%,
-  38% {
-    transform: translateX(-46%);
-  }
-  70%,
-  100% {
-    transform: translateX(46%);
   }
 }
 
